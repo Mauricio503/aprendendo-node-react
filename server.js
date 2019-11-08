@@ -24,20 +24,9 @@ const db = mongoose.createConnection(url,{ useNewUrlParser: true , useUnifiedTop
  //        console.log(e);
 //     });
 
-// cria o objeto
-const Product  = mongoose.model('Product');
+// vai receber toda e qualquer requesição a partir da rota a seguir
+app.use('/api', require('./src/routes'));
 
-
-// passando a rota, req(requesição), res (resposta)
-app.get('/', (req,res) => {
-    Product.create({
-        title: 'React Native',
-        description: 'Build native apps with React',
-        url: 'http://github.com/facebook/react-native'
-    });
-
-    return res.send("Hello World");
-});
 
 // ----------Nodemon----------
 // com o Nodemon é possivel atualizar as informações da pagina sem restartar
