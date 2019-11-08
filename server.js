@@ -8,8 +8,10 @@ const requireDir = require('require-dir');
 
 // iniciando do app
 const app  = express();
+//permite enviar dados em forma de json
+app.use(express.json());
 
-// iniciando banco de dados
+// mapeando models
 requireDir("./src/models");
 
 const url = "mongodb://mauricio:mm1010mauri@cluster0-qaada.mongodb.net/test";
