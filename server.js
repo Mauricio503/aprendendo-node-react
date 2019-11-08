@@ -2,26 +2,41 @@
 const express = require('express');
 //importa mongo, para instalar utlizar no terminal npm install mongoose
 const mongoose = require('mongoose');
+// requireDir mapeia os models
+// utlizar npm install require-dir para instalar
+const requireDir = require('require-dir');
 
 // iniciando do app
 const app  = express();
 
 // iniciando banco de dados
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb://mauricio:mm1010mauri@cluster0-qaada.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true ,useUnifiedTopology: true});
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
+requireDir("./src/models");
+
+const url = "mongodb://mauricio:mm1010mauri@cluster0-qaada.mongodb.net/test";
+const db = mongoose.createConnection(url,{ useNewUrlParser: true , useUnifiedTopology: true }).catch(function(err){
+    console.log(err);
 });
 
-    //mongoose.connect('mongodb://mauricio:mm1010mauri@cluster0-qaada.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect(
+   // "mongodb://mauricio:mm1010mauri@cluster0-qaada.mongodb.net/test?retryWrites=true&w=majority",
+  //   { useNewUrlParser: true,useUnifiedTopology: true},
+ //    ).catch(function(e){
+ //        console.log(e);
+//     });
+
+// cria o objeto
+const Product  = mongoose.model('Product');
 
 
 // passando a rota, req(requesição), res (resposta)
 app.get('/', (req,res) => {
-    res.send("Hello World");
+    Product.create({
+        title: 'React Native',
+        description: 'Build native apps with React',
+        url: 'http://github.com/facebook/react-native'
+    });
+
+    return res.send("Hello World");
 });
 
 // ----------Nodemon----------
