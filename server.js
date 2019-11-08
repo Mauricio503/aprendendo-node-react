@@ -14,7 +14,7 @@ app.use(express.json());
 // mapeando models
 requireDir("./src/models");
 
-const url = "mongodb://mauricio:mm1010mauri@cluster0-qaada.mongodb.net/test";
+const url = "mongodb://mauricio:...@cluster0-qaada.mongodb.net/test";
 const db = mongoose.createConnection(url,{ useNewUrlParser: true , useUnifiedTopology: true }).catch(function(err){
     console.log(err);
 });
