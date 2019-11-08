@@ -5,11 +5,17 @@ const mongoose = require('mongoose');
 // requireDir mapeia os models
 // utlizar npm install require-dir para instalar
 const requireDir = require('require-dir');
+// permite todos os usuarios acessarem as rotas da aplicação
+const cors = require('cors');
+
 
 // iniciando do app
 const app  = express();
 //permite enviar dados em forma de json
 app.use(express.json());
+// nos parentese é possivel passar quais dominios liberar acessar e não é para ser todas
+// as rotas para serem acessadas
+app.use(cors());
 
 // mapeando models
 requireDir("./src/models");
