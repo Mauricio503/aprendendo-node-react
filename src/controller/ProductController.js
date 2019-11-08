@@ -6,7 +6,11 @@ const Product  = mongoose.model('Product');
 // funções
 module.exports = {
     async index(req,res){
-        const products = await Product.find();
+        // query recebe os parametros exemplo product/page=2
+        // se não tiver parametro vai ser 1
+        const { page = 1 } = req.query;
+        // paginate pagina o model e dentro dele pode colocar as condição como limitar em 10 registros
+        const products = await Product.paginate({},{page, limit:10});
 
         return res.json(products);
     },

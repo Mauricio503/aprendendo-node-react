@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+// para instalar npm install mongoose-paginate
+const mongoosePaginate = require('mongoose-paginate');
 //cria o schema no mongo
 const ProductSchema = new mongoose.Schema({
     title: {
@@ -18,5 +20,7 @@ const ProductSchema = new mongoose.Schema({
         default: Date.now,
     },
 });
+
+ProductSchema.plugin(mongoosePaginate);
 
 mongoose.model('Product', ProductSchema);
